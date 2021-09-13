@@ -32,14 +32,14 @@ VIDEOS = [
 class IndexView(View):
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         videos = Video.find_all() or VIDEOS
-        return render(request, "tube/index.html", {"videos": videos})
+        return render(request, "tube/index.html", {"videos": videos, "title": "HyperTube | Home"})
 
 
 class LoginView(View):
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        return render(request, "tube/login.html")
+        return render(request, "tube/login.html", {"title": "HyperTube | Log in"})
 
 
 class UploadView(View):
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        return render(request, "tube/upload.html")
+        return render(request, "tube/upload.html", {"title": "HyperTube | Upload"})

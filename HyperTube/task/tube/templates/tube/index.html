@@ -3,6 +3,16 @@
 {% block app_page %}
     <h2>Hypertube</h2>
     <a href="{% url 'tube:login' %}" target="_blank">Log in</a>
+
+    <form action="" method="get">
+        {% csrf_token %}
+        <label for="search" hidden aria-hidden="true">Search</label>
+        <input id="search"
+               name="q"
+               type="text">
+        <button type="submit">Search</button>
+    </form>
+
     <p>{{ videos | length }} videos</p>
     {% if videos %}
         <ul>

@@ -233,13 +233,6 @@ files:
 
     # Create your tests here.
   learner_created: false
-- name: tube/views.py
-  visible: true
-  text: |
-    from django.shortcuts import render
-
-    # Create your views here.
-  learner_created: false
 - name: test/base.py
   visible: false
   text: |
@@ -930,9 +923,6 @@ files:
   visible: false
   text: ftypisomisomiso2avc1mp41freeDRmdatEHx264+core160r300033f9e14+H264/MPEG+4AVCcodec+Copyleft2003+2020+http//wwwvideolanorg/x264html+optionscaba
   learner_created: false
-- name: test/__init__.py
-  visible: false
-  learner_created: false
 - name: tube/models/video_tag.py
   visible: true
   text: |
@@ -998,24 +988,6 @@ files:
             ),
         ]
   learner_created: true
-- name: tube/urls.py
-  visible: true
-  text: |
-    from django.urls import path
-    from django.views.generic import RedirectView
-
-    from .views import IndexView
-    from .views import LoginView
-    from .views import UploadView
-
-    app_name = "tube"
-    urlpatterns = [
-        path("", RedirectView.as_view(url="tube/")),
-        path("tube/", IndexView.as_view(), name="index"),
-        path("login/", LoginView.as_view(), name="login"),
-        path("tube/upload/", UploadView.as_view(), name="upload"),
-    ]
-  learner_created: true
 - name: tube/models/video.py
   visible: true
   text: |
@@ -1056,6 +1028,34 @@ files:
     from .video import Video
     from .video_tag import VideoTag
   learner_created: true
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: tube/urls.py
+  visible: true
+  text: |
+    from django.urls import path
+    from django.views.generic import RedirectView
+
+    from .views import IndexView
+    from .views import LoginView
+    from .views import UploadView
+
+    app_name = "tube"
+    urlpatterns = [
+        path("", RedirectView.as_view(url="tube/")),
+        path("tube/", IndexView.as_view(), name="index"),
+        path("login/", LoginView.as_view(), name="login"),
+        path("tube/upload/", UploadView.as_view(), name="upload"),
+    ]
+  learner_created: true
+- name: tube/views.py
+  visible: true
+  text: |
+    from django.shortcuts import render
+
+    # Create your views here.
+  learner_created: false
 feedback_link: https://hyperskill.org/projects/131/stages/699/implement#comment
 status: Unchecked
 record: -1
