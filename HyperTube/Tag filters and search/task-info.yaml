@@ -1028,9 +1028,6 @@ files:
     from .video import Video
     from .video_tag import VideoTag
   learner_created: true
-- name: test/__init__.py
-  visible: false
-  learner_created: false
 - name: tube/urls.py
   visible: true
   text: |
@@ -1056,6 +1053,27 @@ files:
 
     # Create your views here.
   learner_created: false
+- name: tube/templates/tube/base.html
+  visible: true
+  learner_created: true
+- name: tube/templates/tube/index.html
+  visible: true
+  learner_created: true
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test_video.mp4
+  visible: true
+  learner_created: true
+- name: tube/migrations/0002_auto_20210913_2222.py
+  visible: true
+  learner_created: true
+- name: tube/migrations/0003_auto_20210913_2224.py
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/131/stages/699/implement#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Mon, 13 Sep 2021 22:14:21 UTC
 record: -1

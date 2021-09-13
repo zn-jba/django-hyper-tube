@@ -1,3 +1,4 @@
 content:
 - Object modification with ORM
 - Aggregations and Ordering
+- Forms and validation

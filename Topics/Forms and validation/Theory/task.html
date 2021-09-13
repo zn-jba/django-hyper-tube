@@ -1,0 +1,77 @@
+<h2>Forms and validation</h2>
+<html>
+ <head></head>
+ <body>
+  <p>Forms are the key elements of the user interface: they define what kind of behavior the service expects from the input fields. Knowing how to make easy and usable forms helps to keep the service simple and clear.</p> 
+  <p>A form is a part of an HTML page, but controlling and validating the data is up to you. That's why Django provides tools to do it with Python. In this topic, we will inspect classes from the Django framework, types of input fields and the process of validation.</p> 
+  <h2>Forms</h2> 
+  <p>This situation is familiar to many of us: there's a close friend who lives far away, someone from childhood or a pen-friend you've never actually met. Holidays come, and you want to surprise them with a postcard. How can you do it? Well, it so happens that we're working hard on the <em>hypergift </em>service. With this service, you can send a postcard to any place worldwide.</p> 
+  <p>We start with this form:</p> 
+  <pre><code class="language-python">from django import forms
+
+
+class PostcardForm(forms.Form):
+    address = forms.CharField(label='Destination Address')
+    author = forms.CharField(min_length=3)
+    compliment = forms.CharField(max_length=1024)
+    date_of_delivery = forms.DateField(input_formats=['%Y/%m/%d'])
+    email = forms.EmailField()</code></pre> 
+  <p>To make a custom form, we inherit the class from <code class="language-python">django.forms.Form</code>. The class provides means to render the form in templates, validate it and show exact errors in the input. Fields should be declared with specific types for correct validation of the user's input (don't worry, we'll discuss it in more detail further on).</p> 
+  <h2>Forms in Templates</h2> 
+  <p>A form is an element of an HTML page, and Django provides tools to render its fields correctly. It also gives default methods to format fields as a table, an unordered list or paragraphs.</p> 
+  <p>Assume that we initialize a form with no arguments and save it in the <code class="language-python">postcard_form</code> variable. We pass the context dictionary <code class="language-python">{'postcard_form': postcard_form}</code> to a template and add <a target="_blank" href="https://docs.djangoproject.com/en/2.2/ref/csrf/#how-to-use-it" rel="noopener noreferrer nofollow">csrf_token</a> to prevent security issues:</p> 
+  <pre><code class="language-django">&lt;form method="post"&gt;{% csrf_token %}
+  &lt;table&gt;{{ postcard_form.as_table }}&lt;/table&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre> 
+  <p>The method <code class="language-python">postcard_form.as_table</code> converts the instance of the <code class="language-python">PostcardForm</code> class to <a target="_blank" href="https://www.w3schools.com/html/html_tables.asp" rel="noopener noreferrer nofollow"><code class="language-python">&lt;tr&gt;</code>, <code class="language-python">&lt;th&gt;</code> and <code class="language-python">&lt;td&gt;</code></a> HTML tags with appropriate labels and attributes. The <em>address</em> field has a custom label in the class, so it also has the same value of<span style="color: #ff4363;"> </span>the label on a page.</p> 
+  <pre><code class="language-html">&lt;th&gt;&lt;label for="id_address"&gt;Destination Address:&lt;/label&gt;&lt;/th&gt;</code></pre> 
+  <p>In the browser the form would look like this:</p> 
+  <p style="text-align: center;"><img alt="" src="https://ucarecdn.com/4294bc96-9db7-49c5-942d-a2d954ec74b5/"></p> 
+  <p></p>
+  <div class="alert alert-primary">
+   Other methods for rendering forms are 
+   <strong>form.as_p</strong> (converts forms to paragraphs) and 
+   <strong>form.as_ul (</strong>converts them to an unordered list).
+  </div>
+  <p></p> 
+  <h2>Validation on the Client Side</h2> 
+  <p>To restrict the user's input, we use types in the form's fields. A form should be strict to catch typos and help the user put in data correctly. Also, the limitations will control for other little accidents: for example, it's highly unlikely that the user has a 10000-symbol long address name, so probably some keyboard keys got stuck. </p> 
+  <p>The field <em>author</em> has a minimum length of three symbols by definition: no less than one character for the first name and two for the last name. What happens if a user tries to send two or fewer symbols? </p> 
+  <p style="text-align: center;"><img alt="" src="https://ucarecdn.com/aba28758-8d3e-4d7d-81ac-f7f855b370ee/"></p> 
+  <p>The user sees a warning that the field should contain at least three characters. This check is done by the browser on a local computer as we haven't sent any data to the server yet. Let's look at the HTML syntax of an element more closely:</p> 
+  <pre><code class="language-html">&lt;td&gt;&lt;input type="text" name="author" minlength="3" required id="id_author"&gt;&lt;/td&gt;</code></pre> 
+  <p>The <code class="language-python">&lt;input&gt;</code> element has a <code class="language-python">minlength</code> attribute with the value "3" and an attribute <code class="language-python">required</code>. It means that this field is mandatory and its length should be no less than 3 characters.</p> 
+  <p></p>
+  <div class="alert alert-primary">
+   Another attribute related to the input length is 
+   <strong>maxlength</strong>.
+   <strong> </strong>It sets the upper limit for the input length.
+  </div>
+  <p></p> 
+  <p>One more field worth double-checking is the <em>email</em>: if it does not contain "@" and ".", it's definitely not right. As for more complex checks, that should happen on the server side.</p> 
+  <h2>Validation on the Server Side</h2> 
+  <p>The browser is not almighty and cannot save the developers from bad input all the time. When an HTML element lacks attributes that specify the behavior, it's Django's turn to save the day.</p> 
+  <p>There are no hints on a page as to which date format should be used. Any non-empty string will be valid, and you can see that in the HTML form:</p> 
+  <pre><code class="language-html">&lt;td&gt;&lt;input type="text" name="date_of_delivery" required id="id_date_of_delivery"&gt;&lt;/td&gt;</code></pre> 
+  <p>However, the field <code class="language-python">date_of_delivery</code> has predefined <code class="language-python">input_formats</code> that Django expects from an input. We can access sent data with the <code class="language-python">POST</code> attribute of <code class="language-python">request</code> in our handler and initialize an instance of <code class="language-python">PostcardForm</code> with it:</p> 
+  <pre><code class="language-python">postcard_form = PostcardForm(request.POST)
+if postcard_form.is_valid():
+    data = postcard_form.cleaned_data  # data is a regular dictionary
+    ...</code></pre> 
+  <p>Magic happens when you call the <code class="language-python">is_valid</code> method: all fields will be validated. After that, all valid fields will be accessed as a dictionary with <code class="language-python">cleaned_data</code> property. If an input is correct, you can keep working with it. But how would the user know about a mistake in the input? The answer is: Django can signal about each one.</p> 
+  <h2>Errors Rendering</h2> 
+  <p>We've already seen how useful messages are when it comes to properly filling the data. Now let's see how Django shows validation errors to the users. To make it work, pass the form initialized with <code class="language-python">request.POST</code> to the context dictionary.</p> 
+  <p>Assume that the user provides "2025-01-01" as a desired date of delivery:</p> 
+  <p style="text-align: center;"><img alt="" src="https://ucarecdn.com/ca4b28f3-f44d-4910-867b-7a91e9968059/"></p> 
+  <p>Although they send the data, the server responds that the format is invalid. As you see, the default message is not very eloquent, so it's better to define a custom message:</p> 
+  <pre><code class="language-python">postcard_form = PostcardForm(request.POST)
+if postcard_form.is_valid():
+    ...
+elif 'date_of_delivery' not in postcard_form.cleaned_data:
+    postcard_form.add_error('date_of_delivery', 'Use YYYY/MM/DD format')</code></pre> 
+  <p>If we don't have <code class="language-python">date_of_delivery</code> in the validated data, we add a custom error message that suggests a hint:</p> 
+  <p style="text-align: center;"><img alt="" src="https://ucarecdn.com/68aaf4b2-cf0c-41aa-a71c-62b8276a3caf/"></p> 
+  <p>Now the user knows what went wrong. Looks like we managed to ease the communication with the service. There's plenty of work left to do, but once we have learned how to use forms, the sky's the limit.</p>
+ </body>
+</html>

@@ -1,0 +1,15 @@
+<h2>Get Cleaned Data</h2>
+<html>
+ <head></head>
+ <body>
+  <p>You have a form for using a promo code in an online shop<em>:</em></p> 
+  <pre><code class="language-python">class PromoCodeForm(forms.Form):
+    user = forms.CharField()
+    code = forms.CharField(min_length=10, max_length=10)</code></pre> 
+  <p>Write a function to validate the form and get cleaned data. If the input is not valid, you should return an empty dictionary.</p> 
+  <p>The single argument of the function is <code class="language-python">raw_data</code>. You can initialize the form directly with it.</p>
+ </body>
+</html><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 15 seconds</font><br><br>
+<b>Caution</b><br><br>
+You may see errors in your code or execution results due to missing context. Don’t worry about it, just write the solution and press Check.
+<br><br>
