@@ -924,9 +924,6 @@ files:
 - name: hypertube/__init__.py
   visible: true
   learner_created: false
-- name: tube/models/__init__.py
-  visible: true
-  learner_created: true
 - name: tube/models/video.py
   visible: true
   learner_created: true
@@ -936,6 +933,21 @@ files:
 - name: tube/models/video_tag.py
   visible: true
   learner_created: true
+- name: db.sqlite3
+  visible: true
+  learner_created: true
+- name: tube/models/__init__.py
+  visible: true
+  learner_created: true
+- name: tube/migrations/0001_initial.py
+  visible: true
+  learner_created: true
+- name: test_video.mp4
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/131/stages/697/implement#comment
-status: Unchecked
-record: -1
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Mon, 13 Sep 2021 11:00:40 UTC
+record: 1
