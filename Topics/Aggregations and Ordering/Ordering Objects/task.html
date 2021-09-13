@@ -1,0 +1,15 @@
+<h2>Ordering Objects</h2>
+<html>
+ <head></head>
+ <body>
+  <p>We have a model <em>House </em>with fields <em>street, house_number, apartments:</em></p> 
+  <pre><code class="language-python">class House(models.Model):
+    apartments = models.IntegerField()
+    house_number = models.IntegerField()
+    street = models.CharField(max_length=64)</code></pre> 
+  <p>Filter all houses on <code class="language-python">street</code> "Elm st." and order them by <code class="language-python">house_number</code> from the smallest to the largest.</p>
+ </body>
+</html><br><br><font color="gray">Memory limit: 256 MB</font><br><font color="gray">Time limit: 15 seconds</font><br><br>
+<b>Caution</b><br><br>
+You may see errors in your code or execution results due to missing context. Don’t worry about it, just write the solution and press Check.
+<br><br>
