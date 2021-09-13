@@ -1,7 +1,7 @@
 from django.db import models
 
-from tag import Tag
-from video import Video
+from .tag import Tag
+from .video import Video
 
 
 class VideoTag(models.Model):

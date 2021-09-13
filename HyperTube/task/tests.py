@@ -9,6 +9,12 @@ class HyperTubeTestRunner(HyperTubeTest):
     funcs = [
         # 1 task
         HyperTubeTest.check_create_videos,
+        # 2 task
+        HyperTubeTest.check_main_header,
+        HyperTubeTest.check_main_page_login_link,
+        HyperTubeTest.check_main_page_upload_link,
+        HyperTubeTest.check_main_page_video_links,
+        HyperTubeTest.check_main_page_video_count,
     ]
 
     @dynamic_test(data=funcs)
