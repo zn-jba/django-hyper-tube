@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% if title %}{{ title }}{% else %}HyperTube{% endif %}</title>
 </head>
 <body>
+
+<main>
+    {% block app_page %}{% endblock %}
+</main>
 
 </body>
 </html>

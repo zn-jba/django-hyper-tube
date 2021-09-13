@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>HyperTube</title>
-</head>
-<body>
+{% extends "tube/base.html" %}
 
-<main>
-    <h2>HyperTube</h2>
+{% block app_page %}
+    <h2>Hypertube</h2>
     <a href="{% url 'tube:login' %}" target="_blank">Log in</a>
     <p>{{ videos | length }} videos</p>
-    {% for video in videos %}
-        <a href="{% url 'tube:...' %}" target="_blank">{{ video.title }}</a>
-    {% endfor %}
+    {% if videos %}
+        <ul>
+            {% for video in videos %}
+                <li><a href="/tube/watch/{{ video.id }}/" target="_blank">{{ video.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br><br>
     <a href="{% url 'tube:upload' %}" target="_blank">Login</a>
-</main>
-
-</body>
-</html>
+{% endblock %}

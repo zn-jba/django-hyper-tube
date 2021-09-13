@@ -15,6 +15,9 @@ class HyperTubeTestRunner(HyperTubeTest):
         HyperTubeTest.check_main_page_upload_link,
         HyperTubeTest.check_main_page_video_links,
         HyperTubeTest.check_main_page_video_count,
+        # 3 task
+        HyperTubeTest.check_main_page_search,
+        HyperTubeTest.check_main_page_tag_filtering,
     ]
 
     @dynamic_test(data=funcs)
