@@ -6,8 +6,23 @@
 </head>
 <body>
 
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h2>Welcome, {{ user.username }}</h2>
+    <a href="{% url 'tube:logout' %}">Logout</a>
+{% endif %}
+
 <main>
-    {% block app_page %}{% endblock %}
+    {% block app_content %}{% endblock %}
 </main>
 
 </body>

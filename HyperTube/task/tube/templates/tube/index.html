@@ -1,8 +1,10 @@
 {% extends "tube/base.html" %}
 
-{% block app_page %}
+{% block app_content %}
     <h2>Hypertube</h2>
     <a href="{% url 'tube:login' %}" target="_blank">Log in</a>
+    <a href="{% url 'tube:register' %}" target="_blank">Sign up</a>
+
     <br><br>
 
     <form action="{% url 'tube:index' %}" method="get">
