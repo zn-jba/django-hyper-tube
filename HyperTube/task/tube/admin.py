@@ -7,16 +7,20 @@ from .models.video_tag import VideoTag
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ("name", "id")
-
-
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ("title", "id")
-    fields = ("id", "title")
+    fields = ("id", "name")
     readonly_fields = ("id",)
 
 
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ("title", "file", "id")
+    fields = ("id", "title", "file")
+    readonly_fields = ("id", "file")
+
+
 class VideoTagAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("tag", "video")
+    fields = ("tag", "video")
+    readonly_fields = ("tag", "video")
 
 
 admin.site.register(Tag, TagAdmin)
