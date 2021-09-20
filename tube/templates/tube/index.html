@@ -1,0 +1,36 @@
+{% extends "tube/base.html" %}
+
+{% block app_content %}
+    {#<h2>Hypertube</h2>#}
+    {#<a href="{% url 'tube:login' %}" target="_blank">Log in</a>#}
+    {#<a href="{% url 'tube:register' %}" target="_blank">Sign up</a>#}
+    {##}
+    {#<br><br>#}
+
+    <form action="{% url 'tube:index' %}" method="get">
+        <label for="search" hidden aria-hidden="true">Search</label>
+        <input id="search"
+               name="q"
+               placeholder="Search..."
+               type="text">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if tag %}
+        <br>
+        <a href="/tube/?tag={{ tag }}">#{{ tag }}</a>
+    {% endif %}
+
+    <p>{{ videos | length }} videos</p>
+    {% if videos %}
+        <ul>
+            {% for video in videos %}
+                <li><a href="/tube/watch/{{ video.id }}/"
+                       target="_blank">{{ video.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <br><br>
+    {#<a href="{% url 'tube:upload' %}" target="_blank">Upload</a>#}
+    {#<a href="{% url 'tube:upload' %}">Upload</a>#}
+{% endblock %}

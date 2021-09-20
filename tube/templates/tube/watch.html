@@ -1,0 +1,14 @@
+{% extends "tube/base.html" %}
+
+{% block app_content %}
+    {% if video_tag %}
+        <p>{{ video_tag.video.title }}</p>
+        {% for tag in tags %}
+            <a href="/tube/?tag={{ tag }}" target="_blank">#{{ tag }}</a>
+        {% endfor %}
+        <br><br>
+        <video width="640" height="480" controls>
+            <source src="/tube/{{ video_tag.video.file.name }}" type="video/mp4">
+        </video>
+    {% endif %}
+{% endblock %}

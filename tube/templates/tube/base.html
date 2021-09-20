@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if title %}{{ title }}{% else %}HyperTube{% endif %}</title>
+</head>
+<body>
+
+{% include "tube/header.html" %}
+
+{% include "tube/messages.html" %}
+
+{#{% if messages %}#}
+{#    <ul class="messages">#}
+{#        {% for message in messages %}#}
+{#            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>#}
+{#                {{ message }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endif %}#}
+
+{#{% if user.is_authenticated %}#}
+{#    <h2>Welcome, {{ user.username }}</h2>#}
+{#    <a href="{% url 'tube:logout' %}">Logout</a>#}
+{#{% endif %}#}
+
+<main>
+    {% block app_content %}{% endblock %}
+</main>
+
+{% include "tube/footer.html" %}
+
+</body>
+</html>

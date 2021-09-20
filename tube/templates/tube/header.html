@@ -1,0 +1,20 @@
+<header>
+    <h2>
+        <a href="{% url 'tube:index' %}" target="_blank">Hypertube</a>
+        {#<a href="{% url 'tube:index' %}" target="_blank">HyperTube</a>#}
+
+    </h2>
+
+    {% if request.user.is_superuser or request.user == task.user %}
+        <a href="{% url 'admin.index' %}">Admin</a>
+    {% endif %}
+
+    <a href="{% url 'tube:upload' %}">Upload</a>
+    <a href="{% url 'tube:login' %}" target="_blank">Login</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'tube:logout' %}">Logout</a>
+        <h2>Welcome, {{ user.username }}</h2>
+    {% else %}
+        <h2>Welcome, stranger!</h2>
+    {% endif %}
+</header>

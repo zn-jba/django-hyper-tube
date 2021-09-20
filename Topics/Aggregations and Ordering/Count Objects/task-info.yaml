@@ -1,9 +1,0 @@
-type: code
-files:
-- name: main.py
-  visible: true
-  text: wall_street_houses_number = ...
-  learner_created: false
-feedback_link: https://hyperskill.org/learn/step/7232#comment
-status: Solved
-record: -1

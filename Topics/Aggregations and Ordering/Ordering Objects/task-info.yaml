@@ -1,9 +1,0 @@
-type: code
-files:
-- name: main.py
-  visible: true
-  text: elm_street_houses = ...
-  learner_created: false
-feedback_link: https://hyperskill.org/learn/step/7231#comment
-status: Solved
-record: -1

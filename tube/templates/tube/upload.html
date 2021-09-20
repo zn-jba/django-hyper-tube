@@ -1,0 +1,9 @@
+{% extends "tube/base.html" %}
+
+{% block app_content %}
+    <form action="" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ upload_form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}
